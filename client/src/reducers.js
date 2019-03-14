@@ -1,11 +1,12 @@
 const initialState = {
-
+cities: []
 };
 
 const reducer = (state = initialState, action) => {
+  const { cities } = action;
   switch (action.type) {
-    case "ACTION":
-      return { ...state };
+    case "GET_CITIES":
+      return { ...state, cities };
     default:
       return state;
   }
