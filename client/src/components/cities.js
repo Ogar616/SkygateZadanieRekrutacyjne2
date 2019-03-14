@@ -23,7 +23,7 @@ const styles = theme => ({
 class AccordionPanel extends Component {
   componentDidMount = () => {
     fetch(
-      "https://api.openaq.org/v1/measurements?country=PL&parametr=bc&limit=10&sort=desc",
+      "https://api.openaq.org/v1/measurements?country=PL&parametr=pm10&limit=10&sort=desc",
       {
         mode: "cors",
         method: "GET"
@@ -33,50 +33,46 @@ class AccordionPanel extends Component {
         return response.json();
       })
       .then(items => {
-        console.log(items);
-        return items;
+        return this.props.getCities(items.results);
+      });
+    fetch(
+      "https://en.wikipedia.org/w/api.php?action=query&titles=Warsaw&prop=revisions&rvprop=content&format=json",
+      {
+        mode: "cors",
+          method: "GET",
+      }
+    )
+      .then(response => {
+        return response.json();
+      })
+      .then(items => {
+        return this.props.getDescriptions(items);
       });
   };
   render() {
-    const { classes } = this.props;
+    const { classes, cities, descriptions } = this.props;
+
+      console.log("render cities", cities);
+    console.log("render desc",descriptions);
     return (
-      <div className={classes.root}>
-        <ExpansionPanel>
-          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography className={classes.heading}>
-              Expansion Panel 1
-            </Typography>
-          </ExpansionPanelSummary>
-          <ExpansionPanelDetails>
-            <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
-            </Typography>
-          </ExpansionPanelDetails>
-        </ExpansionPanel>
-        <ExpansionPanel>
-          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography className={classes.heading}>
-              Expansion Panel 2
-            </Typography>
-          </ExpansionPanelSummary>
-          <ExpansionPanelDetails>
-            <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
-            </Typography>
-          </ExpansionPanelDetails>
-        </ExpansionPanel>
-        <ExpansionPanel disabled>
-          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography className={classes.heading}>
-              Disabled Expansion Panel
-            </Typography>
-          </ExpansionPanelSummary>
-        </ExpansionPanel>
-      </div>
+      <>
+        {cities.map((city, index) => (
+          <ExpansionPanel key={index}>
+            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography className={classes.heading}>
+                {city.location}
+              </Typography>
+            </ExpansionPanelSummary>
+            <ExpansionPanelDetails>
+              <Typography>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
+                eget.
+              </Typography>
+            </ExpansionPanelDetails>
+          </ExpansionPanel>
+        ))}
+      </>
     );
   }
 }
@@ -86,12 +82,14 @@ AccordionPanel.propTypes = {
 };
 
 const mapStateToProps = state => {
-  return { state };
+  return { cities: state.cities, descriptions: state.descriptions };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    getCities: cities => dispatch({ type: "GET_CITIES", cities })
+    getCities: cities => dispatch({ type: "GET_CITIES", cities }),
+    getDescriptions: description =>
+      dispatch({ type: "GET_DESCRIPTION", description })
   };
 };
 
