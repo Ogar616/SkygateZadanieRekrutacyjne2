@@ -10,7 +10,7 @@ import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
-import { getCities, getDescriptions } from '../apiClient';
+import { getCities, getDescriptions } from "../apiClient";
 
 const styles = theme => ({
   root: {
@@ -24,28 +24,26 @@ const styles = theme => ({
 
 class AccordionPanel extends Component {
   componentDidMount = () => {
-      getCities("PL", this.props.getCities)
-      getDescriptions(this.props.locations, this.props.getDescriptions)
-      console.log("dd",this.props.locations)
-
+    getCities("PL", this.props.getCities, this.props.getDescriptions);
+    // getDescriptions(this.props.locations, this.props.getDescriptions)
+    console.log("dd", this.props.locations);
   };
   descriptions = [];
   render() {
-    const { classes, locations } = this.props;
+    const { classes, locations, descriptions } = this.props;
+
+    console.log("render locations", locations);
+    console.log("render descriptions", descriptions);
 
     return (
       <>
         {locations.map((location, index) => (
           <ExpansionPanel key={index}>
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography className={classes.heading}>
-                {location}
-              </Typography>
+              <Typography className={classes.heading}>{location}</Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
-              <Typography>
-               {"dsd"}
-              </Typography>
+              <Typography>{descriptions[index]}</Typography>
             </ExpansionPanelDetails>
           </ExpansionPanel>
         ))}
@@ -65,8 +63,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getCities: cities => dispatch({ type: "GET_CITIES", cities }),
-    getDescriptions: locations =>
-      dispatch({ type: "GET_DESCRIPTIONS", locations, getDescriptions })
+    getDescriptions: descriptions =>
+      dispatch({ type: "GET_DESCRIPTIONS", descriptions })
   };
 };
 
