@@ -20,7 +20,7 @@ const App = props => {
   return (
     <div className={classes.root}>
       <NavBar />
-      <Input/>
+      {/* <Input/> */}
       <AccordionPanel/>
     </div>
   );
