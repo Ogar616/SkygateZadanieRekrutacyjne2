@@ -10,6 +10,8 @@ import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
+import { getCities, getDescriptions } from '../apiClient';
+
 const styles = theme => ({
   root: {
     width: "100%"
@@ -22,52 +24,27 @@ const styles = theme => ({
 
 class AccordionPanel extends Component {
   componentDidMount = () => {
-    fetch(
-      "https://api.openaq.org/v1/measurements?country=PL&parametr=pm10&limit=10&sort=desc",
-      {
-        mode: "cors",
-        method: "GET"
-      }
-    )
-      .then(response => {
-        return response.json();
-      })
-      .then(items => {
-        return this.props.getCities(items.results);
-      });
-    fetch(
-      "https://en.wikipedia.org/w/api.php?action=query&titles=Warsaw&prop=revisions&rvprop=content&format=json",
-      {
-        mode: "cors",
-          method: "GET",
-      }
-    )
-      .then(response => {
-        return response.json();
-      })
-      .then(items => {
-        return this.props.getDescriptions(items);
-      });
-  };
-  render() {
-    const { classes, cities, descriptions } = this.props;
+      getCities("PL", this.props.getCities)
+      getDescriptions(this.props.locations, this.props.getDescriptions)
+      console.log("dd",this.props.locations)
 
-      console.log("render cities", cities);
-    console.log("render desc",descriptions);
+  };
+  descriptions = [];
+  render() {
+    const { classes, locations } = this.props;
+
     return (
       <>
-        {cities.map((city, index) => (
+        {locations.map((location, index) => (
           <ExpansionPanel key={index}>
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
               <Typography className={classes.heading}>
-                {city.location}
+                {location}
               </Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
               <Typography>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                eget.
+               {"dsd"}
               </Typography>
             </ExpansionPanelDetails>
           </ExpansionPanel>
@@ -82,14 +59,14 @@ AccordionPanel.propTypes = {
 };
 
 const mapStateToProps = state => {
-  return { cities: state.cities, descriptions: state.descriptions };
+  return { locations: state.cities, descriptions: state.descriptions };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     getCities: cities => dispatch({ type: "GET_CITIES", cities }),
-    getDescriptions: description =>
-      dispatch({ type: "GET_DESCRIPTION", description })
+    getDescriptions: locations =>
+      dispatch({ type: "GET_DESCRIPTIONS", locations, getDescriptions })
   };
 };
 
