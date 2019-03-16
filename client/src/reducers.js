@@ -5,13 +5,15 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
-  const { cities, inputValue, locations, descriptions } = action;
+  const { cities, inputValue, city } = action;
   switch (action.type) {
     case "GET_CITIES":
       return { ...state, cities };
-    case "GET_DESCRIPTIONS":
-      console.log("loc", descriptions);
-      return { ...state, descriptions };
+    case "ADD_CITY":
+    console.log("!!!!", city);
+      const newCities = [...state.cities];
+      newCities.push(city);
+      return { ...state, cities: newCities };
     case "GET_INPUT_VALUE":
       console.log("reducer inputV", state.inputValue);
       return { ...state, inputValue };

@@ -13,8 +13,7 @@ const fetchData = () => {
   });
 };
 
-const getCities = (country, getCities, getDescriptions) => {
-  let descriptions = [];
+const getData = (country, addCity) => {
   axios.get(openaq + country).then(response => {
     const cities = response.data.results.map(item => item.city);
     cities.forEach(city => {
@@ -27,44 +26,15 @@ const getCities = (country, getCities, getDescriptions) => {
               id = key;
             }
             const description = response.data.query.pages[id].extract;
-            descriptions.push(description);
+            addCity({city, description});
           })
           .catch(error => {
             console.log("Ooops ", error);
           });
       });
-      getCities(cities);
-   
-      // });
-    });
-    getDescriptions(descriptions);
-    console.log(descriptions);
+    })
   });
-
 };
-
-// const getDescriptions = (list, getDescriptions) => {
-//   let descriptions = [];
-//   console.log("list in getDescriptions", list);
-
-//   list.forEach(city => {
-//     console.log("in");
-//     // axios
-//     //   .get(wiki + city)
-//     //   .then(response => {
-//     //     let id;
-//     //     for (let key in response.data.query.pages) {
-//     //       id = key;
-//     //     }
-//     //     const description = response.data.query.pages[id].extract;
-//     //     console.log("desc", description)
-//     //     // descriptions.push(description);
-//     //   })
-//     //   .catch(error => {
-//     //     console.log("Ooops ", error);
-//     //   });
-//   });
-// };
 
 const getInputValue = dispatch => {
   fetch(server + "input", {
@@ -98,4 +68,4 @@ const putInputValue = newInput => {
     .catch(error => console.log("Ooops", error));
 };
 
-export { getDescriptions, getCities, getInputValue, putInputValue };
+export { getData, getInputValue, putInputValue };

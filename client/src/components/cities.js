@@ -10,7 +10,7 @@ import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
-import { getCities, getDescriptions } from "../apiClient";
+import { getData } from "../apiClient";
 
 const styles = theme => ({
   root: {
@@ -24,26 +24,24 @@ const styles = theme => ({
 
 class AccordionPanel extends Component {
   componentDidMount = () => {
-    getCities("PL", this.props.getCities, this.props.getDescriptions);
-    // getDescriptions(this.props.locations, this.props.getDescriptions)
-    console.log("dd", this.props.locations);
+     getData("PL", this.props.addCity);
   };
-  descriptions = [];
-  render() {
-    const { classes, locations, descriptions } = this.props;
 
-    console.log("render locations", locations);
-    console.log("render descriptions", descriptions);
+  render() {
+    const { classes, cities, descriptions } = this.props;
+
+    // console.log("render locations", cities);
+    // console.log("render descriptions", descriptions);
 
     return (
       <>
-        {locations.map((location, index) => (
+        {cities.map((location, index) => (
           <ExpansionPanel key={index}>
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography className={classes.heading}>{location}</Typography>
+              <Typography className={classes.heading}>{location.city}</Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
-              <Typography>{descriptions[index]}</Typography>
+              <Typography>{cities[index].description}</Typography>
             </ExpansionPanelDetails>
           </ExpansionPanel>
         ))}
@@ -57,14 +55,14 @@ AccordionPanel.propTypes = {
 };
 
 const mapStateToProps = state => {
-  return { locations: state.cities, descriptions: state.descriptions };
+  return { cities: state.cities, descriptions: state.descriptions };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     getCities: cities => dispatch({ type: "GET_CITIES", cities }),
-    getDescriptions: descriptions =>
-      dispatch({ type: "GET_DESCRIPTIONS", descriptions })
+    addCity: city =>
+      dispatch({ type: "ADD_CITY", city })
   };
 };
 
