@@ -13,18 +13,20 @@ const fetchData = () => {
 
 const getData = (country, addCity) => {
   axios.get(openaq + country).then(response => {
-    const cities = response.data.results.map(item => item.city);
+    const cities = response.data.results.map(item => {
+      return { name: item.city, location: item.location };
+    });
     cities.forEach(city => {
-      fetchData(city).then(() => {
+      fetchData(city.name).then(() => {
         axios
-          .get(wiki + city)
+          .get(wiki + city.name)
           .then(response => {
             let id;
             for (let key in response.data.query.pages) {
               id = key;
             }
             const description = response.data.query.pages[id].extract;
-            addCity({ city, description });
+            addCity({ city: `${city.name} - ${city.location}`, description });
           })
           .catch(error => {
             console.log("Ooops ", error);
