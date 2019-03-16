@@ -1,41 +1,29 @@
 const initialState = {
   cities: [],
-  inputValue: ""
+  inputValue: "PL"
 };
 
 const reducer = (state = initialState, action) => {
-  const { cities, value, city } = action;
+  const { value, city } = action;
   switch (action.type) {
-    case "GET_CITIES":
-      return { ...state, cities };
     case "ADD_CITY":
       const newCities = [...state.cities];
       newCities.push(city);
       return { ...state, cities: newCities };
     case "CHANGE_INPUT_VALUE":
       console.log("reducer inputV", value);
-      let code;
       switch (value.label) {
         case "Germany":
-          code = "GER";
-          break;
+          return { ...state, inputValue: "GER" };
         case "Poland":
-          code = "PL";
-          break;
+          return { ...state, inputValue: "PL" };
         case "France":
-          code = "FR";
-          break;
-        case "SPAIN":
-          code = "ES";
-          break;
+          return { ...state, inputValue: "FR" };
+        case "Spain":
+          return { ...state, inputValue: "ES" };
         default:
-          code = "PL";
+          return { ...state, inputValue: "PL" };
       }
-      return { ...state, inputValue: code };
-    case "SET_INPUT_VALUE":
-      const newValue = action.inputValue;
-      console.log("newI reducer", newValue);
-      return { ...state, inputValue: newValue };
     default:
       return state;
   }
