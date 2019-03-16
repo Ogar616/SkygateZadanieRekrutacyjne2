@@ -24,14 +24,27 @@ const styles = theme => ({
 });
 
 class AccordionPanel extends Component {
+  state = {
+    code: this.props.countryCode
+  }
   componentDidMount = () => {
     const { addCity, countryCode } = this.props;
     console.log(this.props);
     getData(countryCode, addCity);
   };
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.countryCode !== this.props.countryCode) {
+      this.setState({
+        code: this.props.countryCode
+      });
+    }
+  }
+
   render() {
-    const { classes, cities } = this.props;
+    const { classes, cities, countryCode } = this.props;
+
+    console.log(countryCode);
 
     return (
       <div className={classes.root}>
