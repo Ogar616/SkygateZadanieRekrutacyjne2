@@ -5,6 +5,7 @@ import Select from "react-select";
 
 import { withStyles } from "@material-ui/core/styles";
 import { emphasize } from "@material-ui/core/styles/colorManipulator";
+import Divider from "@material-ui/core/Divider";
 
 import { components, suggestions } from "./inputComponents";
 
@@ -54,9 +55,6 @@ const styles = theme => ({
     marginTop: theme.spacing.unit,
     left: 0,
     right: 0
-  },
-  divider: {
-    height: theme.spacing.unit * 2
   }
 });
 
@@ -90,7 +88,7 @@ class Input extends Component {
           placeholder="Search a country"
           isClearable
         />
-        <div className={classes.divider} />
+        <Divider />
       </div>
     );
   }
