@@ -15,12 +15,22 @@ const styles = theme => ({
   root: {
     flexGrow: 1,
     height: 250,
-    width: 500,
-    margin: "0 auto"
+    width: 200,
+    maxWidth: 350,
+    position: "absolute",
+    right: 10,
+    top: 6,
+    [theme.breakpoints.down("xs")]: {
+      position: "absolute",
+      left: 0,
+      right: 0,
+      margin: "0 auto"
+    }
   },
   input: {
     display: "flex",
-    padding: 0
+    paddingLeft: 20,
+    backgroundColor: "white"
   },
   valueContainer: {
     display: "flex",
@@ -44,11 +54,11 @@ const styles = theme => ({
     padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`
   },
   singleValue: {
-    fontSize: 16
+    fontSize: 16,
+
   },
   placeholder: {
     position: "absolute",
-    left: 2,
     fontSize: 16
   },
   paper: {
