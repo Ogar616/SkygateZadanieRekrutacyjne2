@@ -29,7 +29,7 @@ const getData = (country, addCity) => {
             addCity({ city: `${city.name} - ${city.location}`, description });
           })
           .catch(error => {
-            console.log("Ooops ", error);
+            console.log("Ooops", error);
           });
       });
     });
