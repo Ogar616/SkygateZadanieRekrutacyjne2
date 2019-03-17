@@ -11,11 +11,7 @@ const openaq =
 const wiki =
   "https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exintro&explaintext&format=json&category=city&redirects&titles=";
 
-const fetchData = () => {
-  return new Promise((resolve, reject) => {
-    resolve();
-  });
-};
+const fetchData = () => new Promise(resolve => resolve());
 
 const getData = (country, addCity) => {
   axios.get(openaq + country).then(response => {
