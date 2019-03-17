@@ -1,7 +1,9 @@
 const initialState = {
   cities: [],
-  inputValue: "PL"
+  inputValue: localStorage.inputValue
 };
+
+const myStorage = localStorage;
 
 const reducer = (state = initialState, action) => {
   const { value, city } = action;
@@ -13,18 +15,22 @@ const reducer = (state = initialState, action) => {
     case "CHANGE_INPUT_VALUE":
       switch (value.label) {
         case "Germany":
+          myStorage.inputValue = "DE";
           return { ...state, inputValue: "DE" };
         case "Poland":
+          myStorage.inputValue = "PL";
           return { ...state, inputValue: "PL" };
         case "France":
+         myStorage.inputValue = "FR";
           return { ...state, inputValue: "FR" };
         case "Spain":
+         myStorage.inputValue = "ES";
           return { ...state, inputValue: "ES" };
         default:
-          return { ...state, inputValue: "PL" };
-      };
-      case "CLEAR_DATA":
-      return { ...state, cities: []}
+          return { ...state, inputValue: myStorage.inputValue };
+      }
+    case "CLEAR_DATA":
+      return { ...state, cities: [] };
     default:
       return state;
   }
