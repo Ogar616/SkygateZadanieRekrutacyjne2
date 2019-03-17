@@ -98,7 +98,8 @@ class Input extends Component {
 
 Input.propTypes = {
   classes: PropTypes.object.isRequired,
-  theme: PropTypes.object.isRequired
+  theme: PropTypes.object.isRequired,
+  changeInputValue: PropTypes.func,
 };
 
 const mapStateToProps = state => {
