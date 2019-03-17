@@ -25,9 +25,6 @@ const styles = theme => ({
 });
 
 class AccordionPanel extends Component {
-  state = {
-    code: this.props.countryCode
-  };
   componentDidMount = () => {
     const { addCity, countryCode } = this.props;
     getData(countryCode, addCity);
@@ -64,7 +61,11 @@ class AccordionPanel extends Component {
 }
 
 AccordionPanel.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  cities: PropTypes.array,
+  countryCode: PropTypes.string,
+  addCity: PropTypes.func,
+  clearData: PropTypes.func
 };
 
 const mapStateToProps = state => {
