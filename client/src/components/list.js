@@ -26,25 +26,22 @@ const styles = theme => ({
 class AccordionPanel extends Component {
   state = {
     code: this.props.countryCode
-  }
+  };
   componentDidMount = () => {
     const { addCity, countryCode } = this.props;
-    console.log(this.props);
     getData(countryCode, addCity);
   };
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.countryCode !== this.props.countryCode) {
-      this.setState({
-        code: this.props.countryCode
-      });
+  componentDidUpdate = prevProps => {
+    const { addCity, countryCode, clearData } = this.props;
+    if (prevProps.countryCode !== countryCode) {
+      clearData();
+      getData(countryCode, addCity);
     }
   }
 
   render() {
-    const { classes, cities, countryCode } = this.props;
-
-    console.log(countryCode);
+    const { classes, cities } = this.props;
 
     return (
       <div className={classes.root}>
@@ -75,7 +72,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addCity: city => dispatch({ type: "ADD_CITY", city })
+    addCity: city => dispatch({ type: "ADD_CITY", city }),
+    clearData: () => dispatch({ type: "CLEAR_DATA" })
   };
 };
 
