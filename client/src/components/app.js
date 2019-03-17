@@ -5,6 +5,7 @@ import { withStyles } from "@material-ui/core/styles";
 
 import withRoot from "./withRoot";
 import NavBar from "./nav";
+import DescriptionCard from './descriptionCard';
 import List from './list';
 
 const styles = theme => ({
@@ -19,6 +20,7 @@ const App = props => {
   return (
     <div className={classes.root}>
       <NavBar />
+      <DescriptionCard/>
       <List/>
     </div>
   );
