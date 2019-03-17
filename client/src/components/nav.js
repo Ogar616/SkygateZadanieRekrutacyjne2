@@ -5,16 +5,11 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 
+import Input from './input/input'
+
 const styles = theme => ({
   root: {
     width: "100%"
-  },
-  grow: {
-    flexGrow: 1
-  },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20
   },
   title: {
     display: "none",
@@ -42,9 +37,10 @@ const Navbar = props => {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" color="inherit" className={classes.grow}>
+          <Typography variant="h6" color="inherit" className={classes.title}>
             Skygate - recruitment task
           </Typography>
+          <Input />
         </Toolbar>
       </AppBar>
     </div>
