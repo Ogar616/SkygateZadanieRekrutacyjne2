@@ -3,10 +3,9 @@ import PropTypes from "prop-types";
 
 import { withStyles } from "@material-ui/core/styles";
 
-import withRoot from "./components/withRoot";
-import NavBar from "./components/nav";
-import Input from './components/input/input';
-import List from './components/list';
+import withRoot from "./withRoot";
+import NavBar from "./nav";
+import List from './list';
 
 const styles = theme => ({
   root: {
@@ -20,7 +19,6 @@ const App = props => {
   return (
     <div className={classes.root}>
       <NavBar />
-      <Input/>
       <List/>
     </div>
   );
