@@ -27,7 +27,7 @@ const reducer = (state = initialState, action) => {
          myStorage.inputValue = "ES";
           return { ...state, inputValue: "ES" };
         default:
-          return { ...state, inputValue: myStorage.inputValue };
+          return { ...state, inputValue: localStorage.inputValue };
       }
     case "CLEAR_DATA":
       return { ...state, cities: [] };
