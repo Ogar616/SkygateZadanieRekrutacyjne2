@@ -11,10 +11,9 @@ const reducer = (state = initialState, action) => {
       newCities.push(city);
       return { ...state, cities: newCities };
     case "CHANGE_INPUT_VALUE":
-      console.log("reducer inputV", value);
       switch (value.label) {
         case "Germany":
-          return { ...state, inputValue: "GER" };
+          return { ...state, inputValue: "DE" };
         case "Poland":
           return { ...state, inputValue: "PL" };
         case "France":
@@ -23,7 +22,9 @@ const reducer = (state = initialState, action) => {
           return { ...state, inputValue: "ES" };
         default:
           return { ...state, inputValue: "PL" };
-      }
+      };
+      case "CLEAR_DATA":
+      return { ...state, cities: []}
     default:
       return state;
   }
