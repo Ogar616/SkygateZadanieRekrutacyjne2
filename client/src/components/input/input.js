@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import PropTypes from "prop-types";
+
+import { connect } from "react-redux";
+import { changeInputValue } from '../../actions';
 import Select from "react-select";
 
 import { withStyles } from "@material-ui/core/styles";
@@ -105,7 +107,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    changeInputValue: value => dispatch({ type: "CHANGE_INPUT_VALUE", value })
+    changeInputValue: value => dispatch(changeInputValue(value))
   };
 };
 

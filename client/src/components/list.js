@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
+import {clearData, addCity} from '../actions';
 
 import { withStyles } from "@material-ui/core/styles";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
@@ -72,8 +73,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addCity: city => dispatch({ type: "ADD_CITY", city }),
-    clearData: () => dispatch({ type: "CLEAR_DATA" })
+    addCity: city => dispatch(addCity(city)),
+    clearData: () => dispatch(clearData())
   };
 };
 
