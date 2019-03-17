@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
-import { changeInputValue } from '../../actions';
+import { changeInputValue } from "../../actions";
 import Select from "react-select";
 
 import { withStyles } from "@material-ui/core/styles";
@@ -45,8 +45,8 @@ const styles = theme => ({
   chipFocused: {
     backgroundColor: emphasize(
       theme.palette.type === "light"
-        ? theme.palette.grey[300]
-        : theme.palette.grey[700],
+        ? theme.palette.primary.light
+        : theme.palette.secondary.main,
       0.08
     )
   },
@@ -54,8 +54,7 @@ const styles = theme => ({
     padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`
   },
   singleValue: {
-    fontSize: 16,
-
+    fontSize: 16
   },
   placeholder: {
     position: "absolute",
@@ -70,46 +69,38 @@ const styles = theme => ({
   }
 });
 
-class Input extends Component {
-  state = {
-    country: null,
-    multi: null
+const Input = props => {
+  const { classes, theme, changeInputValue } = props;
+  const selectStyles = {
+    input: base => ({
+      ...base,
+      color: theme.palette.primary.light,
+      "& input": {
+        font: "inherit"
+      }
+    })
   };
 
-  render() {
-    const { classes, theme, changeInputValue } = this.props;
-
-    const selectStyles = {
-      input: base => ({
-        ...base,
-        color: theme.palette.text.primary,
-        "& input": {
-          font: "inherit"
-        }
-      })
-    };
-
-    return (
-      <div className={classes.root}>
-        <Select
-          classes={classes}
-          styles={selectStyles}
-          options={suggestions}
-          components={components}
-          onChange={changeInputValue}
-          placeholder="Search a country"
-          isClearable
-        />
-        <Divider />
-      </div>
-    );
-  }
-}
+  return (
+    <div className={classes.root}>
+      <Select
+        classes={classes}
+        styles={selectStyles}
+        options={suggestions}
+        components={components}
+        onChange={changeInputValue}
+        placeholder="Search a country"
+        isClearable
+      />
+      <Divider />
+    </div>
+  );
+};
 
 Input.propTypes = {
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
-  changeInputValue: PropTypes.func,
+  changeInputValue: PropTypes.func
 };
 
 const mapStateToProps = state => {
