@@ -1,3 +1,6 @@
+//openaq API is not working properly. "parameters=bc" query is giving different pollutions measurments in every record. Odrering measurments by for example pm10 is not working as well. https://api.openaq.org/v1/measurements?parameters=pm10 - with any parameter is not giving any records - gateway tiemout. It is not a only one case. During app development few times API did not responded for about 15-20 minutes at all. To get app working I used LIST OF STATIONS (name-of-the-city - name-of-measurement-station)in chosen country sorted by count of measurements - descending.
+//Wikipedia API is highly unstructured. In some cases cities descriptions are descriptions of other things with the same name - especially in countries different than Poland and Germany.
+
 import axios from "axios";
 
 const openaq =
@@ -29,7 +32,7 @@ const getData = (country, addCity) => {
             addCity({ city: `${city.name} - ${city.location}`, description });
           })
           .catch(error => {
-            console.log("Ooops", error);
+            console.log("Ooops ", error);
           });
       });
     });
