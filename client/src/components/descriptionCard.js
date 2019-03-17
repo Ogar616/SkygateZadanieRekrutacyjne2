@@ -10,9 +10,6 @@ const styles = {
   card: {
     minWidth: 275,
     marginBottom: 10
-  },
-  title: {
-    fontSize: 14
   }
 };
 
