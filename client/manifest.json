@@ -1,18 +1,6 @@
 {
-    "short_name": "Shopping",
-    "name": "Shopping List",
-    "icons": [
-      {
-        "src": "/assets/f128.png",
-        "type": "image/png",
-        "sizes": "128x128"
-      },
-      {
-        "src": "/assets/f512.png",
-        "type": "image/png",
-        "sizes": "512x512"
-      }
-    ],
+    "short_name": "Skygate",
+    "name": "Skygate - recruitment task",
     "start_url": "/",
     "background_color": "#3367D6",
     "display": "fullscreen",
