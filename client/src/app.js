@@ -6,7 +6,7 @@ import { withStyles } from "@material-ui/core/styles";
 import withRoot from "./components/withRoot";
 import NavBar from "./components/nav";
 import Input from './components/input/input';
-import AccordionPanel from './components/list';
+import List from './components/list';
 
 const styles = theme => ({
   root: {
@@ -21,7 +21,7 @@ const App = props => {
     <div className={classes.root}>
       <NavBar />
       <Input/>
-      <AccordionPanel/>
+      <List/>
     </div>
   );
 };
