@@ -4,6 +4,9 @@
     "type": "git",
     "url": "git://github.com/Ogar616/notAnotherShoppingList.git"
   },
+  "engines": {
+    "node": "11.10.0"
+  },
   "version": "0.1.0",
   "private": false,
   "dependencies": {
@@ -42,5 +45,6 @@
   "devDependencies": {},
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "proxy": "https: //en.wikipedia.org/w/"
 }
