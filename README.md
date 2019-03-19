@@ -4,8 +4,16 @@ Technologies: ReactJS, Redux, MaterialUI, Localstorage.
 
 APIs: https://docs.openaq.org/, https://www.mediawiki.org/wiki/
 
+### Installation
 
+1. Go to a directory you want to clone this project in your terminal,
+2. Type: git clone https://github.com/Ogar616/SkygateZadanieRekrutacyjne2.git
+3. Type: cd SkygateZadanieRekrutacyjne2/client
+4. Type: npm i
+5. Type: npm start, and project will run in your browser
+6. Disable CORS in your browser. In chrome you can install extension "Allow CORS: Access-Control-Allow-Origin"
 
+### Task requirements
 
 In order to get the highest possible score, all of the following requirements should be completed. Candidates are allowed to use any technology which they consider most suitable. Try to use the best UX/UI practices, feel free in design conception. Good luck!
 
